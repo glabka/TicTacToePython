@@ -87,6 +87,12 @@ class Coo:
     
     def get_column(self):
         return self._column
+    
+    def __str__(self):
+        return "[" + str(self._row) + "][" + str(self._column) + "]"
+    
+    def __repr__(self):
+        return self.__str__()
 
 class ValuedCoo(Coo):
     def __init__(self, row, column, val):
@@ -95,7 +101,12 @@ class ValuedCoo(Coo):
         
     def get_val(self):
         return self._val
+    
+    def __str__(self):
+        return "[" + str(self._row) + "][" + str(self._column) + "]<" + str(self.get_val()) + ">"
 
+    def __repr__(self):
+        return self.__str__()
 # custom exceptions            
 class AlreadyFilledSquareError(Exception):
     def __init__(self, *args):
