@@ -37,7 +37,7 @@ class Grid:
                     print("|", end = "")
             print()
 
-    def set_cursor_column(self, row, column):
+    def set_cursor(self, row, column):
         self.verify_coos_in_range(row, column)
         self._cursor_row = row
         self._cursor_column = column
@@ -54,6 +54,9 @@ class Grid:
     def insert_circle(self, row, column):
         self._insert_val(row, column, "O")
         
+    def get_val(self, row, column):
+        return self._grid[row][column]
+        
     def verify_coos_in_range(self, row, column):
         grid_size = self.size()
         if row >= grid_size:
@@ -69,11 +72,30 @@ class Grid:
         return len(self._grid)
     
     def get_cursor_column(self):
-        return self.cursor_column
+        return self._cursor_column
     
     def get_cursor_row(self):
-        return self.cursor_row
-     
+        return self._cursor_row
+
+class Coo:
+    def __init__(self, row, column):
+        self._row = row
+        self._column = column
+    
+    def get_row(self):
+        return self._row
+    
+    def get_column(self):
+        return self._column
+
+class ValuedCoo(Coo):
+    def __init__(self, row, column, val):
+        Coo.__init__(self, row, column)
+        self._val = val
+        
+    def get_val(self):
+        return self._val
+
 # custom exceptions            
 class AlreadyFilledSquareError(Exception):
     def __init__(self, *args):
